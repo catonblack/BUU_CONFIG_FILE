@@ -1,0 +1,29 @@
+
+(load "C:/Cadence/LibraryBuilder/setup/skill/builder.ile")
+
+setSkillPath(buildString(append1(getSkillPath() "C:/CentralLib/ECL_CadenceLib/SKILL"))) 
+
+;SKILL DEBUGER
+load("skill_debuger.il" "www.allegro-skill.com")
+
+load("layout.il")
+
+;AUTO SILK CHECK
+load("autosilkUtils_public.il")
+;loadContext("AutosilkUtils_public.cxt")
+
+;SET GRID
+load("setgrid.il")
+
+;CAM350
+;DstBluePrintExport() is the BluePrint ODB++ export entry point
+load("DstBxi.il")
+;DstCAM350() is the CAM350 Cross Probe Startup
+load("DstCxi.il")
+DstDocumentWizard = "C:\\Program Files (x86)\\DownStream Technologies\\2015\\BluePrint-PCB 5.1\\DocWzrd.exe"
+DstBluePrintAddMenuItem()
+
+;ANSYS
+;# BEGIN INTEGRATION: Layout Integrations for ECAD Translators
+;load("ansys.ilinit")
+;# END INTEGRATION: Layout Integrations for ECAD Translators
