@@ -2,6 +2,7 @@
 // https://github.com/clowwindy/gfwlist2pac
 
 var domains = {
+  "read01.com": 1,
   "projectne.thomsonreuters.com": 1,
   "downloads.atlassian.com": 1,
   "zhuanghongkuan1.gitbooks.io": 1,
@@ -11,7 +12,7 @@ var domains = {
   "www.ijteee.org": 1,
   "www.wnacg.org": 1,
   "www.cyclone-tw.com": 1,
-  "www.loldytt.com": 1,
+  "www.loldytt.com": 0,
   "www.kensington.com": 1,
   "www.siargo.com": 1,
   "www.topview-optical.com": 1,
