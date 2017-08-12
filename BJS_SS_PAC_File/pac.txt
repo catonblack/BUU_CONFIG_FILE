@@ -2,6 +2,7 @@
 // https://github.com/clowwindy/gfwlist2pac
 
 var domains = {
+  "www.keil.com":1,
   "www.makeuseof.com": 1,
   "101.96.10.63": 1,
   "read01.com": 1,
