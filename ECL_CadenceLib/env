@@ -8,59 +8,41 @@ funckey Z reject
 
 #-----------Ctrl Command-------------#
 funckey ~A save_as
-####### ~B to switch between bubble modes during routing
-funckey ~B 'settoggle hug "Off" "Hug only" "Hug preferred" "Shove preferred" ; options bubble_space $hug'
-#funckey ~E open
 funckey ~F "prepopup ; pop dyn_option_select 'Selection set@:@Clear all selections';set prompt;prompt 'Find Ref Des';refdes $prompt;zoom selection"
-#funckey ~G 
-funckey ~Q 'settoggle routespace mindrc current user ; pop routespace $routespace; echo routespace = $routespace'
-####### ~R for rotate in 90 degree increments
-funckey ~R iangle 90
 funckey ~S save
-####### ~T toggles the corner degree during route
-funckey ~T 'settoggle direction 90 45 Off; options lock_direction $direction; echo "Toggle Direction"'
-####### ~V Search use net name
-funckey ~V "prepopup ; pop dyn_option_select 'Selection set@:@Clear all selections';set prompt;prompt 'Find Net Name';net $prompt;zoom selection"
-####### ~W to toggle cline (track) width during routing
-funckey ~W 'settoggle minw .1 .3 .5 1 1.5 2; setwindow form.mini; FORM mini acon_line_width $minw; setwindow pcb'
+####### ~E Search use net name
+funckey ~E "prepopup ; pop dyn_option_select 'Selection set@:@Clear all selections';set prompt;prompt 'Find Net Name';net $prompt;zoom selection"
 funckey ~X redo
 funckey ~Z undo
 
 #-----------Shift Command------------#
-####### r for rotate in 45 degree increments
-funckey r iangle 45
 ####### x or z to type in coordinates
 alias x  pick
 alias z  pick 1
-alias qx ipick
-alias qz ipick 0
+alias zx ipick
+alias zz ipick 0
 
-funckey ew unfix
-funckey ex delete vertex
-funckey vz dehilight
-funckey sc decompose shape
 funckey rfr unmark fanout
 
 #-----------NUM Command for snap----#
 
 # snap to segments
-funckey 2SX "prepopup;pop dyn_option_select 'Snap pick to@:@Segment Vertex'" # 2SX for snap to segment vertex
-funckey 2SD "prepopup;pop dyn_option_select 'Snap pick to@:@Segment Midpoint'" # 2SD for snap to segment midpoint
-funckey 2SS "prepopup;pop dyn_option_select 'Snap pick to@:@Segment'" # 2SS for snap to segment
-funckey 2SE "prepopup;pop dyn_option_select 'Snap pick to@:@Intersection'" # 2SE for snap to intersection
+funckey 2WV "prepopup;pop dyn_option_select 'Snap pick to@:@Segment Vertex'" # 2SX for snap to segment vertex
+funckey 2WA "prepopup;pop dyn_option_select 'Snap pick to@:@Segment Midpoint'" # 2SD for snap to segment midpoint
+funckey 2WW "prepopup;pop dyn_option_select 'Snap pick to@:@Segment'" # 2SS for snap to segment
+funckey 2WX "prepopup;pop dyn_option_select 'Snap pick to@:@Intersection'" # 2SE for snap to intersection
 
 # snap to center
-funckey 2CA "prepopup;pop dyn_option_select 'Snap pick to@:@Arc/Circle Center'" # 2CA for snap to arc or circle center
-funckey 2CC "prepopup;pop dyn_option_select 'Snap pick to@:@Figure'" # 2CC for snap to arc or circle center
-funckey 2CS "prepopup;pop dyn_option_select 'Snap pick to@:@Symbol Origin'" # 2CS for snap to symbol origin
+funckey 2CQ "prepopup;pop dyn_option_select 'Snap pick to@:@Arc/Circle Center'" # 2CQ for snap to arc or circle center
+funckey 2CC "prepopup;pop dyn_option_select 'Snap pick to@:@Figure'" # 2CC for snap to figure
+funckey 2CB "prepopup;pop dyn_option_select 'Snap pick to@:@Symbol Origin'" # 2CB for snap to symbol origin
+funckey 2CS "prepopup;pop dyn_option_select 'Snap pick to@:@Shape Center'" # 2CS for snap to arc or circle center
 
 funckey 2V "prepopup;pop dyn_option_select 'Snap pick to@:@Via'" # 2V for snap to via
-funckey 2A "prepopup;pop dyn_option_select 'Snap pick to@:@Pin'" # 2A for snap to pin
-funckey 2F "prepopup;pop dyn_option_select 'Snap pick to@:@Figure'" # 2F for snap to figure
-
-funckey 2EX "prepopup;pop dyn_option_select 'Snap pick to@:@Pad Edge Vertex'" # 2E for snap to Pad Edge Vertex
-funckey 2ED "prepopup;pop dyn_option_select 'Snap pick to@:@Pad Edge Midpoint'" # 2E for snap to Pad Edge Midpoint
-funckey 2EE "prepopup;pop dyn_option_select 'Snap pick to@:@Pad Edge'" # 2E for snap to Pad Edge
+funckey 2FF "prepopup;pop dyn_option_select 'Snap pick to@:@Pin'" # 2A for snap to pin
+funckey 2FV "prepopup;pop dyn_option_select 'Snap pick to@:@Pad Edge Vertex'" # 2E for snap to Pad Edge Vertex
+funckey 2FA "prepopup;pop dyn_option_select 'Snap pick to@:@Pad Edge Midpoint'" # 2E for snap to Pad Edge Midpoint
+funckey 2FE "prepopup;pop dyn_option_select 'Snap pick to@:@Pad Edge'" # 2E for snap to Pad Edge
 
 #-----------Wheel Command------------#
 ####### use ctrl + scroll button on mouse to change active subclass
@@ -80,21 +62,18 @@ button  Swheel_up     "roam x -$roamInc" #move left
 button  Swheel_down   "roam x $roamInc" #move right
 
 #-----------Windows Command---------#
-####### Home for zoom fit
 funckey Home zoom fit
 funckey Esc  cancel
 funckey ' '  Toggle
 
 #-----------Function Command--------#
-####### F1 to show current shortcut definitions
-funckey F1 'alias; button'
-####### F5 for refresh screen
-funckey F5 redraw
+funckey F1 'alias; button' # F1 to show current shortcut definitions
+funckey F5 redraw # F5 for refresh screen
 ####### F12 List of available commands and help on these 
 funckey F12 helpcmd
 
 #-----------Add Command-------------#
-funckey AAA add arc
+funckey AAC add arc
 funckey AAF add frect
 funckey AAQ add circle
 funckey AAR add rect
@@ -107,42 +86,44 @@ funckey AEW pop fix
 funckey AER pop rotate
 funckey AEC pop cut
 
-funckey AWF swap pins
-funckey AWC swap components
-
 #-----------Edit Command------------#
-funckey EA  move
-funckey EB  property edit
-funckey EC  copy
+funckey EAA move
+funckey EAR rotate
+funckey EAE mirror
+funckey ECC copy
+funckey ECZ zcopy shape
+funckey ECG change
+funckey ECT text edit
+funckey ECE property edit
+funckey EVV vertex
+funckey EVD delete vertex
+funckey ESF swap pins
+funckey ESC swap components
+
 funckey ED  delete
-funckey EE  mirror
-funckey EG  change
-#funckey EV  
-funckey EW  fix
-funckey ER  rotate
+funckey EFF fix
+funckey EFD unfix
 funckey ES  Spin
-funckey ET  text edit
-funckey EX  vertex
-funckey EZ  zcopy shape
 
 #-----------View Command------------#
-funckey VA assign color
-funckey VB flipdesign
-funckey VC '"cmgr"; echo "Constraints Manager"' 
+funckey VA  assign color
+funckey VB  flipdesign
+funckey VC  '"cmgr"; echo "Constraints Manager"' 
 funckey VDE '"prmed"; echo "Parameter Edit"'
-funckey VDS dfa_spreadsheet
+funckey VDA dfa_spreadsheet
 funckey VDC color192
-funckey VE '"show element";echo "Query Element"'
-funckey VF cns show
-funckey VG 'grid toggle; redraw; echo "Toggle Grid"'
-funckey VQ show measure
-funckey VR 'settoggle rats "rats all" "unrats all"; $rats; echo "Toggle Airlines"'
-funckey VS '"status"; echo "Status Manager"'
-funckey VT shadow toggle
-funckey VV 3d_viewer
-funckey VW datatips toggle
-funckey VX highlight sov
-funckey VZ hilight
+funckey VE  '"show element";echo "Query Element"'
+funckey VF  cns show
+funckey VG  'grid toggle; redraw; echo "Toggle Grid"'
+funckey VQ  show measure
+funckey VR  'settoggle rats "rats all" "unrats all"; $rats; echo "Toggle Airlines"'
+funckey VS  '"status"; echo "Status Manager"'
+funckey VT  shadow toggle
+funckey VV  3d_viewer
+funckey VW  datatips toggle
+funckey VX  highlight sov
+funckey VZZ hilight
+funckey VZD dehilight
 
 #-----------Workmode Command--------#
 funckey WA placementedit
@@ -157,23 +138,23 @@ funckey WC rfedit_appm
 funckey SAG shape_app add
 funckey SAR shape_app add rect
 funckey SAQ shape_app add circle
-funckey SBE shape edit boundary
-funckey SC  compose shape
-funckey SD  island_delete
+funckey SCG shape edit boundary
+funckey SCC compose shape
+funckey SCD decompose shape
+funckey SSS shape select
+funckey SDD island_delete
 funckey SF  shape check
 funckey SG  shapeupdate
 funckey SR  shape merge shapes
-funckey SS  shape select
 funckey ST  shape change type
 funckey SVG shape void polygon
 funckey SVR shape void rectangle
 funckey SVQ shape void circle
-funckey SVD shape void delete
 funckey SVE shape void element
+funckey SVD shape void delete
 funckey SVA shape void move
 funckey SVC shape void copy
 funckey SAS 'pop net list'
-#funckey SX  
 
 #-----------Bundle Command----------#
 funckey BA  bundle create
@@ -193,18 +174,29 @@ funckey BXD flow vertex delete
 funckey BT net schedule
 
 #-----------Route Command-----------#
-funckey RE add connect
-funckey RG slide
-funckey RTD delay tune
-funckey RTA phase_tune
-funckey RS custom smooth
-funckey RVA "pop bbdrill -cursor"
-funckey RVV pop bbdrill
+funckey REE add connect
+funckey REC pop controltrace
+funckey REW pop singletrace 
+funckey RET pop neck 
+funckey REQ pop enhanced pad entry
+funckey RES pop swap
+
+funckey RW 'settoggle minw 6 10 15 20 30 50; setwindow form.mini; FORM mini acon_line_width $minw; setwindow pcb' # RW to toggle cline (track) width during routing
+funckey RB 'settoggle hug "Off" "Hug only" "Hug preferred" "Shove preferred" ; options bubble_space $hug'
+funckey RQ 'settoggle routespace mindrc current user ; pop routespace $routespace; echo routespace = $routespace'
+funckey RT 'settoggle direction 90 45 Off; options lock_direction $direction; echo "Toggle Direction"' # RT toggles the corner degree during route
+
+funckey RGG slide
+funckey RGD delay tune
+funckey RGA phase_tune
+funckey RGS custom smooth
+
+funckey RXW delete by line
+funckey RXR delete by rectangle
 
 funckey RFA create fanout
 funckey RFC copy fanout
 funckey RFR mark fanout
-funckey RFA create fanout
 
 funckey RRF fanout_by_pick
 funckey RRR rute_by_pick
@@ -217,21 +209,13 @@ funckey RDD delete fillet
 funckey RZA add taper
 funckey RZD delete taper
 
-funckey RXC delete by line
-funckey RXR delete by rectangle
-
-funckey RWA pop swap
-funckey RWC pop controltrace
-funckey RWS pop singletrace 
-funckey RWT pop neck 
-funckey RWE pop enhanced pad entry
-
 #-----------Tool Command------------#
 funckey TRR replace padstack
 funckey TC  dbdoctor
 funckey TDR drc update
-funckey TWR waive DRC
-funckey TRD drc window
+funckey TDW waive DRC
+funckey TDV browse drcs
+
 funckey TRT reports
 funckey TDC draft chamfer 
 funckey TDF draft fillet
@@ -242,25 +226,27 @@ funckey TTF testprep fix
 funckey TTV thieving
 
 #-----------ViewOnly Command--------#
-funckey GAA 'settoggle lay all_layer all_layer_nil; $lay'
-funckey GET 'settoggle lay lay_top lay_top_nil; $lay'
-funckey GEB 'settoggle lay lay_bot lay_bot_nil; $lay'
-funckey GDT 'settoggle lay solder_top solder_top_nil; $lay'
-funckey GDB 'settoggle lay solder_bot solder_bot_nil; $lay'
+funckey GAA 'settoggle lay all_layer_nil all_layer; $lay'
+funckey GET 'settoggle lay lay_top_nil lay_top; $lay'
+funckey GEB 'settoggle lay lay_bot_nil lay_bot; $lay'
+funckey GDT 'settoggle lay solder_top_nil solder_top; $lay'
+funckey GDB 'settoggle lay solder_bot_nil solder_bot; $lay'
 #funckey GDR
-funckey GAT 'settoggle lay assembly_top assembly_top_nil; $lay'
-funckey GAB 'settoggle lay assembly_bot assembly_bot_nil; $lay'
-funckey GGT 'settoggle lay paste_top paste_top_nil; $lay'
-funckey GGB 'settoggle lay paste_bot paste_bot_nil; $lay'
-funckey GC  'settoggle lay symbolori symbolori_nil; $lay'
-funckey GST 'settoggle lay silk_top silk_top_nil; $lay'
-funckey GSB 'settoggle lay silk_bot silk_bot_nil; $lay'
-funckey GTT 'settoggle lay test_top test_top_nil; $lay'
-funckey GTB 'settoggle lay test_bot test_bot_nil; $lay'
-#funckey GXD 'settoggle lay xdrill xdrill_nil; $lay'
-funckey GXE 'settoggle lay xdimension xdimension_nil;$lay'
-funckey GVT 'settoggle lay viapin_top viapin_top_nil; $lay'
-funckey GVB 'settoggle lay viapin_bot viapin_bot_nil; $lay'
+funckey GAT 'settoggle lay assembly_top_nil assembly_top; $lay'
+funckey GAB 'settoggle lay assembly_bot_nil assembly_bot; $lay'
+funckey GGT 'settoggle lay paste_top_nil paste_top; $lay'
+funckey GGB 'settoggle lay paste_bot_nil paste_bot; $lay'
+funckey GC  'settoggle lay symbolori_nil symbolori; $lay'
+funckey GST 'settoggle lay silk_top_nil silk_top; $lay'
+funckey GSB 'settoggle lay silk_bot_nil silk_bot; $lay'
+funckey GSA 'settoggle lay autosilk_top_nil autosilk_top; $lay'
+funckey GSZ 'settoggle lay autosilk_bot_nil autosilk_bot; $lay'
+funckey GTT 'settoggle lay test_top_nil test_top; $lay'
+funckey GTB 'settoggle lay test_bot_nil test_bot; $lay'
+#funckey GXD 'settoggle lay xdrill_nil xdrill; $lay'
+funckey GXE 'settoggle lay xdimension_nil xdimension;$lay'
+funckey GVT 'settoggle lay viapin_top_nil viapin_top; $lay'
+funckey GVB 'settoggle lay viapin_bot_nil viapin_bot; $lay'
 
 #-----------Find Command------------#
 ####### global select
@@ -276,7 +262,8 @@ funckey FG  'setwindow form.find;FORM find all_off;FORM find groups YES;setwindo
 funckey FS  'setwindow form.find;FORM find all_off;FORM find shapes YES;setwindow pcb' #shapes 
 funckey FT  'setwindow form.find;FORM find all_off;FORM find text YES;setwindow pcb' #text
 funckey FV  'setwindow form.find;FORM find all_off;FORM find vias YES;setwindow pcb' #via
-funckey FW  'setwindow form.find;FORM find all_off;FORM find lines YES;FORM find other_segs YES;setwindow pcb' #lines 
+funckey FW  'setwindow form.find;FORM find all_off;FORM find lines YES;FORM find other_segs YES;setwindow pcb' #lines
+funckey FX  'setwindow form.find;FORM find all_off;FORM find voids YES;FORM find other_segs YES;setwindow pcb' #Void/Cavity  
 #funckey FR #RATs
 ####### Add find the elements
 funckey FAB 'setwindow form.find;FORM find symbols YES;setwindow pcb' #add choose symbol
@@ -289,41 +276,13 @@ funckey FAS 'setwindow form.find;FORM find shapes YES;setwindow pcb' #add choose
 funckey FAT 'setwindow form.find;FORM find text YES;setwindow pcb' #add choose texy
 funckey FAV 'setwindow form.find;FORM find vias YES;setwindow pcb' #add choose via
 funckey FAW 'setwindow form.find;FORM find lines YES;FORM find other_segs YES;setwindow pcb' #add choose lines 
-
-#-----------Define Grid-----------#
-#it's decided by system uint
-#alias G0.0254   "set grid_val = 0.0254; replay set_grid.scr"
-#alias G0.05     "set grid_val = 0.05; replay set_grid.scr"
-#alias G0.1      "set grid_val = 0.1; replay set_grid.scr"
-#alias G0.127    "set grid_val = 0.127; replay set_grid.scr"
-#alias G0.254    "set grid_val = 0.254; replay set_grid.scr"
-#alias G1        "set grid_val = 1; replay set_grid.scr"
-#alias G2.54     "set grid_val = 2.54; replay set_grid.scr"
-#alias G5        "set grid_val = 5; replay set_grid.scr"
-#alias G10       "set grid_val = 10; replay set_grid.scr"
-#alias G100      "set grid_val = 100; replay set_grid.scr"
+funckey FAX  'setwindow form.find;FORM find all_off;FORM find voids YES;FORM find other_segs YES;setwindow pcb' #Void/Cavity 
 
 #-----------Direction Funckey-----#
 funckey Left  ipick -1
 funckey Right ipick 1
 funckey Up    ipick 0 1
 funckey Down  ipick 0 -1
-
-#-----------unuseful--------------#
-alias LDR   replay clr_drill.scr
-alias LDE   replay clr_default.scr
-alias LCR   replay clr_center.scr
-#-------------------LAYER
-alias L1    replay clr_l_top.scr
-alias L2    replay clr_l_bottom.scr
-#-------------------TOP
-alias LTK   replay clr_silk_top.scr
-alias LTP   replay clr_paste_top.scr
-alias LTS   replay clr_solder_top.scr
-#-------------------BOTTOM
-alias LBK   replay clr_silk_bottom.scr
-alias LBP   replay clr_paste_bottom.scr
-alias LBS   replay clr_solder_bottom.scr
 
 #-------------------------------------------------------------------------------------------#
 
@@ -332,33 +291,21 @@ alias LBS   replay clr_solder_bottom.scr
 ### Please do not modify to the end of the file.
 ### Place your hand edits above this section.
 ###
-set padpath = $padpath C:/CentralLib/ECL_CadenceLib/PAD/
-set psmpath = $psmpath C:/CentralLib/ECL_CadenceLib/FOOTPRINT_LEAD C:/CentralLib/ECL_CadenceLib/FOOTPRINT_CON C:/CentralLib/ECL_CadenceLib/FOOTPRINT_SMD C:/CentralLib/ECL_CadenceLib/SYMBOL_FLASH C:/CentralLib/ECL_CadenceLib/SYMBOL_SHAPE C:/CentralLib/ECL_CadenceLib/SYMBOL_MECHANICAL
-set steppath = $steppath C:/CentralLib/MechanicalPrj/CTLE_SMD/ C:/CentralLib/MechanicalPrj/CTLE_LEAD/ C:/CentralLib/MechanicalPrj/CTLE_CON/
-set parampath = $parampath C:/CentralLib/ECL_CadenceLib/PARAMETER/
-set miscpath = $miscpath C:/CentralLib/ECL_CadenceLib/DXF_MAP/
-set allegro_etch_length_on
-set max_undo_memory = 50
-set undo_depth = 25
-set dump_library_directory = LIB
-set ads_sdart = GERBER
-set ads_sdplot = PLOT
-set ads_sdreport = REPORT
-set ads_sdlog = LOG
-set buttonfactor = 0.250000
-unset no_dynamic_zoom
-unset wheel_zoom_center
 set step_display_resistors_capacitors
 set step_place_bounds_top = Place_Bound_Top
 set step_place_bounds_bottom = Place_Bound_Buttom
-set noconfirm_savedb
-set shape_add_filltype = dynamic
+set max_undo_memory = 50
+set undo_depth = 25
+set buttonfactor = 0.100000
+unset no_dynamic_zoom
+unset wheel_zoom_center
 unset shape_merge_props
+set shape_add_filltype = dynamic
+set noconfirm_savedb
 unset draw_etch_outline
 unset display_no_close_grids
-set infinite_cursor_bug_nt
-set pcb_cursor = infinite
-set color_dlg_auto_apply
+unset infinite_cursor_bug_nt
+unset pcb_cursor
 set no_dragpopup
 unset display_no_auto_hide_boundary
 unset display_noskeletal_draw
@@ -367,6 +314,7 @@ set display_refdes_subclass = silkscreen
 unset showelement_autoavoid
 set showmeasure_altunits = millimeters
 unset browser_type
+unset padlib_filebrowser
 unset disable_hover_over
 unset datatips_fixedpos
 set focus_followmouse = anywhere
@@ -384,12 +332,30 @@ set apd_new_units = millimeters
 set padstack_editor_new_units = millimeters
 set apd_new_accuracy = 4
 set padstack_editor_new_accuracy = 4
-set logic_edit_enabled
 set dfa_pause_level = 1
+set logic_edit_enabled
 set scriptpath = $scriptpath C:/CentralLib/ECL_CadenceLib/SCRIPT/
-unset clearance_view
+unset disable_unsupported_menus
+unset enable_command_window_history
+unset legacy_diffpair_checks
+unset dbdoc_fixed_private
+set clearance_view = channel
 set interactive_3d_canvas
 unset pcb_autoroam
 set roaminc = 16
+set align_guides
 set idf_place_bounds_bottom = Place_Bound_Buttom
 set idf_place_bounds_top = Place_Bound_Top
+set idx_enhanced_features
+set dump_library_directory = LIB
+set ads_sdart = GERBER
+set ads_sdplot = PLOT
+set ads_sdreport = REPORT
+set ads_sdlog = LOG
+set padpath = $padpath C:/CentralLib/ECL_CadenceLib/PAD/
+set psmpath = $psmpath C:/CentralLib/ECL_CadenceLib/FOOTPRINT_LEAD C:/CentralLib/ECL_CadenceLib/FOOTPRINT_CON C:/CentralLib/ECL_CadenceLib/FOOTPRINT_SMD C:/CentralLib/ECL_CadenceLib/SYMBOL_FLASH C:/CentralLib/ECL_CadenceLib/SYMBOL_SHAPE C:/CentralLib/ECL_CadenceLib/SYMBOL_MECHANICAL
+set steppath = $steppath C:/CentralLib/MechanicalPrj/CTLE_SMD/ C:/CentralLib/MechanicalPrj/CTLE_LEAD/ C:/CentralLib/MechanicalPrj/CTLE_CON/
+set step_facet_path = $step_facet_path
+set parampath = $parampath C:/CentralLib/ECL_CadenceLib/PARAMETER/
+set miscpath = $miscpath C:/CentralLib/ECL_CadenceLib/DXF_MAP/
+set allegro_etch_length_on
