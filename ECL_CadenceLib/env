@@ -5,6 +5,7 @@ funckey D done
 funckey Q oops
 funckey X next
 funckey Z reject
+alias G setgrids
 
 #-----------Ctrl Command-------------#
 funckey ~A save_as
@@ -16,16 +17,14 @@ funckey ~X redo
 funckey ~Z undo
 
 #-----------Shift Command------------#
-####### x or z to type in coordinates
-alias x  pick
-alias z  pick 1
-alias zx ipick
-alias zz ipick 0
+####### type in coordinates
+alias 2X  pick
+alias 2QX ipick
+alias 2QY ipick 0
 
 funckey rfr unmark fanout
 
 #-----------NUM Command for snap----#
-
 # snap to segments
 funckey 2WV "prepopup;pop dyn_option_select 'Snap pick to@:@Segment Vertex'" # 2SX for snap to segment vertex
 funckey 2WA "prepopup;pop dyn_option_select 'Snap pick to@:@Segment Midpoint'" # 2SD for snap to segment midpoint
@@ -84,7 +83,6 @@ funckey AEA pop move
 funckey AEE pop mirror
 funckey AEW pop fix
 funckey AER pop rotate
-funckey AEC pop cut
 
 #-----------Edit Command------------#
 funckey EAA move
@@ -97,13 +95,17 @@ funckey ECT text edit
 funckey ECE property edit
 funckey EVV vertex
 funckey EVD delete vertex
+funckey ESS Spin
 funckey ESF swap pins
-funckey ESC swap components
-
-funckey ED  delete
+funckey ESB swap components
+funckey ESR pop lasso
+funckey ESA pop path
+funckey ESG pop poly
+funckey EDD  delete
+funckey EDW delete by line
+funckey EDR delete by rectangle
 funckey EFF fix
 funckey EFD unfix
-funckey ES  Spin
 
 #-----------View Command------------#
 funckey VA  assign color
@@ -112,18 +114,20 @@ funckey VC  '"cmgr"; echo "Constraints Manager"'
 funckey VDE '"prmed"; echo "Parameter Edit"'
 funckey VDA dfa_spreadsheet
 funckey VDC color192
+funckey VDS '"status"; echo "Status Manager"'
 funckey VE  '"show element";echo "Query Element"'
 funckey VF  cns show
 funckey VG  'grid toggle; redraw; echo "Toggle Grid"'
 funckey VQ  show measure
 funckey VR  'settoggle rats "rats all" "unrats all"; $rats; echo "Toggle Airlines"'
-funckey VS  '"status"; echo "Status Manager"'
+funckey VS 'settoggle  no_etch_shape_display;redraw'
 funckey VT  shadow toggle
 funckey VV  3d_viewer
 funckey VW  datatips toggle
-funckey VX  highlight sov
+funckey VZS highlight sov
 funckey VZZ hilight
 funckey VZD dehilight
+funckey VX 'settoggle  pcb_cursor infinite cross infinite_cursor_bug_nt;redraw'
 
 #-----------Workmode Command--------#
 funckey WA placementedit
@@ -138,9 +142,9 @@ funckey WC rfedit_appm
 funckey SAG shape_app add
 funckey SAR shape_app add rect
 funckey SAQ shape_app add circle
-funckey SCG shape edit boundary
-funckey SCC compose shape
-funckey SCD decompose shape
+funckey SBE shape edit boundary
+funckey SBC compose shape
+funckey SBD decompose shape
 funckey SSS shape select
 funckey SDD island_delete
 funckey SF  shape check
@@ -176,23 +180,25 @@ funckey BT net schedule
 #-----------Route Command-----------#
 funckey REE add connect
 funckey REC pop controltrace
-funckey REW pop singletrace 
+funckey RER pop singletrace 
 funckey RET pop neck 
-funckey REQ pop enhanced pad entry
+funckey REF pop enhanced pad entry
 funckey RES pop swap
+funckey REV pop viapattern params
+funckey REQ pop routespace
 
-funckey RW 'settoggle minw 6 10 15 20 30 50; setwindow form.mini; FORM mini acon_line_width $minw; setwindow pcb' # RW to toggle cline (track) width during routing
-funckey RB 'settoggle hug "Off" "Hug only" "Hug preferred" "Shove preferred" ; options bubble_space $hug'
-funckey RQ 'settoggle routespace mindrc current user ; pop routespace $routespace; echo routespace = $routespace'
-funckey RT 'settoggle direction 90 45 Off; options lock_direction $direction; echo "Toggle Direction"' # RT toggles the corner degree during route
+funckey RW 'settoggle minw 8 10 15 20; setwindow form.mini; FORM mini acon_line_width $minw; setwindow pcb' # RW to toggle cline (track) width during routing
+funckey RQ 'settoggle routespace mindrc current user; pop routespace $routespace; echo routespace = $routespace'
+funckey RT 'settoggle direction 90 45 Off; options lock_direction $direction; echo direction = $direction' # RT toggles the corner degree during route
+funckey RV 'settoggle viapattern perp stagger diag_l diag_r outtaper intaper; pop viapattern $viapattern; echo viapattern = $viapattern'
 
 funckey RGG slide
 funckey RGD delay tune
 funckey RGA phase_tune
 funckey RGS custom smooth
-
-funckey RXW delete by line
-funckey RXR delete by rectangle
+funckey RGB 'settoggle hug "Off" "Hug only" "Hug preferred" "Shove preferred" ; options bubble_space $hug'
+funckey RGV 'settoggle viashove "Off" "Minimal" "Full" ; options shove_vias $viashove'
+funckey RGC pop cut
 
 funckey RFA create fanout
 funckey RFC copy fanout
@@ -204,8 +210,8 @@ funckey RRT miter_by_pick
 funckey RRS unmiter_by_pick
 funckey RRE elong_by_pick
 
-funckey RDA add fillet
-funckey RDD delete fillet
+funckey RAA add fillet
+funckey RAD delete fillet
 funckey RZA add taper
 funckey RZD delete taper
 
@@ -229,54 +235,68 @@ funckey TTV thieving
 funckey GAA 'settoggle lay all_layer_nil all_layer; $lay'
 funckey GET 'settoggle lay lay_top_nil lay_top; $lay'
 funckey GEB 'settoggle lay lay_bot_nil lay_bot; $lay'
+funckey GBT 'settoggle lay shape_boundry_etch_top shape_boundry_top shape_etch_top; $lay'
+funckey GBB 'settoggle lay shape_boundry_etch_bot shape_boundry_bot shape_etch_bot; $lay'
 funckey GDT 'settoggle lay solder_top_nil solder_top; $lay'
 funckey GDB 'settoggle lay solder_bot_nil solder_bot; $lay'
+funckey GDV 'settoggle lay xdrill_nil xdrill; $lay'
+funckey GDD 'settoggle lay xdimension_nil xdimension;$lay'
 #funckey GDR
 funckey GAT 'settoggle lay assembly_top_nil assembly_top; $lay'
 funckey GAB 'settoggle lay assembly_bot_nil assembly_bot; $lay'
 funckey GGT 'settoggle lay paste_top_nil paste_top; $lay'
 funckey GGB 'settoggle lay paste_bot_nil paste_bot; $lay'
-funckey GC  'settoggle lay symbolori_nil symbolori; $lay'
+funckey GCC 'settoggle lay symbolori_nil symbolori; $lay'
 funckey GST 'settoggle lay silk_top_nil silk_top; $lay'
 funckey GSB 'settoggle lay silk_bot_nil silk_bot; $lay'
 funckey GSA 'settoggle lay autosilk_top_nil autosilk_top; $lay'
 funckey GSZ 'settoggle lay autosilk_bot_nil autosilk_bot; $lay'
 funckey GTT 'settoggle lay test_top_nil test_top; $lay'
 funckey GTB 'settoggle lay test_bot_nil test_bot; $lay'
-#funckey GXD 'settoggle lay xdrill_nil xdrill; $lay'
-funckey GXE 'settoggle lay xdimension_nil xdimension;$lay'
-funckey GVT 'settoggle lay viapin_top_nil viapin_top; $lay'
-funckey GVB 'settoggle lay viapin_bot_nil viapin_bot; $lay'
+funckey GFT 'settoggle lay viapin_top_nil viapin_top; $lay'
+funckey GFB 'settoggle lay viapin_bot_nil viapin_bot; $lay'
 
 #-----------Find Command------------#
 ####### global select
-funckey FAQ 'setwindow form.find;FORM find all_off;setwindow pcb' #clear all
+funckey FQA 'setwindow form.find;FORM find all_off;setwindow pcb' #clear all
 funckey FAA 'setwindow form.find;FORM find all_on;setwindow pcb' #clear all
 ####### Only find the elements
-funckey FC  'setwindow form.find;FORM find all_off;FORM find clines YES;FORM find cline_segs YES;setwindow pcb' #clines
-funckey FB  'setwindow form.find;FORM find all_off;FORM find symbols YES;setwindow pcb' #choose symbol
-funckey FD  'setwindow form.find;FORM find all_off;FORM find drc_errors YES;setwindow pcb' #DRC errors
-funckey FE  'setwindow form.find;FORM find all_off;FORM find nets YES;setwindow pcb'  #choose net
-funckey FF  'setwindow form.find;FORM find all_off;FORM find pins YES;setwindow pcb' #pin
-funckey FG  'setwindow form.find;FORM find all_off;FORM find groups YES;setwindow pcb' #groups
-funckey FS  'setwindow form.find;FORM find all_off;FORM find shapes YES;setwindow pcb' #shapes 
-funckey FT  'setwindow form.find;FORM find all_off;FORM find text YES;setwindow pcb' #text
-funckey FV  'setwindow form.find;FORM find all_off;FORM find vias YES;setwindow pcb' #via
-funckey FW  'setwindow form.find;FORM find all_off;FORM find lines YES;FORM find other_segs YES;setwindow pcb' #lines
-funckey FX  'setwindow form.find;FORM find all_off;FORM find voids YES;FORM find other_segs YES;setwindow pcb' #Void/Cavity  
+funckey FAC  'setwindow form.find;FORM find all_off;FORM find clines YES;FORM find cline_segs YES;setwindow pcb' #clines
+funckey FAB  'setwindow form.find;FORM find all_off;FORM find symbols YES;setwindow pcb' #choose symbol
+funckey FAD  'setwindow form.find;FORM find all_off;FORM find drc_errors YES;setwindow pcb' #DRC errors
+funckey FAE  'setwindow form.find;FORM find all_off;FORM find nets YES;setwindow pcb'  #choose net
+funckey FAF  'setwindow form.find;FORM find all_off;FORM find pins YES;setwindow pcb' #pin
+funckey FAG  'setwindow form.find;FORM find all_off;FORM find groups YES;setwindow pcb' #groups
+funckey FAS  'setwindow form.find;FORM find all_off;FORM find shapes YES;setwindow pcb' #shapes 
+funckey FAT  'setwindow form.find;FORM find all_off;FORM find text YES;setwindow pcb' #text
+funckey FAV  'setwindow form.find;FORM find all_off;FORM find vias YES;setwindow pcb' #via
+funckey FAW  'setwindow form.find;FORM find all_off;FORM find lines YES;FORM find other_segs YES;setwindow pcb' #lines
+funckey FAX  'setwindow form.find;FORM find all_off;FORM find voids YES;FORM find other_segs YES;setwindow pcb' #Void/Cavity  
 #funckey FR #RATs
 ####### Add find the elements
-funckey FAB 'setwindow form.find;FORM find symbols YES;setwindow pcb' #add choose symbol
-funckey FAC 'setwindow form.find;FORM find clines YES;FORM find cline_segs YES;setwindow pcb' #add choose clines
-funckey FAD 'setwindow form.find;FORM find drc_errors YES;setwindow pcb' #add choose DRC errors
-funckey FAE 'setwindow form.find;FORM find nets YES;setwindow pcb'  #add choose net
-funckey FAF 'setwindow form.find;FORM find pins YES;setwindow pcb' #add choose pin
-funckey FAG 'setwindow form.find;FORM find groups YES;setwindow pcb' #groups
-funckey FAS 'setwindow form.find;FORM find shapes YES;setwindow pcb' #add choose shapes 
-funckey FAT 'setwindow form.find;FORM find text YES;setwindow pcb' #add choose texy
-funckey FAV 'setwindow form.find;FORM find vias YES;setwindow pcb' #add choose via
-funckey FAW 'setwindow form.find;FORM find lines YES;FORM find other_segs YES;setwindow pcb' #add choose lines 
-funckey FAX  'setwindow form.find;FORM find all_off;FORM find voids YES;FORM find other_segs YES;setwindow pcb' #Void/Cavity 
+funckey FB 'setwindow form.find;FORM find symbols YES;setwindow pcb' #add choose symbol
+funckey FC 'setwindow form.find;FORM find clines YES;FORM find cline_segs YES;setwindow pcb' #add choose clines
+funckey FD 'setwindow form.find;FORM find drc_errors YES;setwindow pcb' #add choose DRC errors
+funckey FE 'setwindow form.find;FORM find nets YES;setwindow pcb'  #add choose net
+funckey FF 'setwindow form.find;FORM find pins YES;setwindow pcb' #add choose pin
+funckey FG 'setwindow form.find;FORM find groups YES;setwindow pcb' #groups
+funckey FS 'setwindow form.find;FORM find shapes YES;setwindow pcb' #add choose shapes 
+funckey FT 'setwindow form.find;FORM find text YES;setwindow pcb' #add choose texy
+funckey FV 'setwindow form.find;FORM find vias YES;setwindow pcb' #add choose via
+funckey FW 'setwindow form.find;FORM find lines YES;FORM find other_segs YES;setwindow pcb' #add choose lines 
+funckey FX 'setwindow form.find;FORM find all_off;FORM find voids YES;FORM find other_segs YES;setwindow pcb' #Void/Cavity 
+####### Remove find the elements
+funckey FQB 'setwindow form.find;FORM find symbols NO;setwindow pcb' #add choose symbol
+funckey FQC 'setwindow form.find;FORM find clines NO;FORM find cline_segs NO;setwindow pcb' #add choose clines
+funckey FQD 'setwindow form.find;FORM find drc_errors NO;setwindow pcb' #add choose DRC errors
+funckey FQE 'setwindow form.find;FORM find nets NO;setwindow pcb'  #add choose net
+funckey FQF 'setwindow form.find;FORM find pins NO;setwindow pcb' #add choose pin
+funckey FQG 'setwindow form.find;FORM find groups NO;setwindow pcb' #groups
+funckey FQS 'setwindow form.find;FORM find shapes NO;setwindow pcb' #add choose shapes 
+funckey FQT 'setwindow form.find;FORM find text NO;setwindow pcb' #add choose texy
+funckey FQV 'setwindow form.find;FORM find vias NO;setwindow pcb' #add choose via
+funckey FQW 'setwindow form.find;FORM find lines NO;FORM find other_segs NO;setwindow pcb' #add choose lines 
+funckey FQX 'setwindow form.find;FORM find all_off;FORM find voids NO;FORM find other_segs NO;setwindow pcb' #Void/Cavity 
 
 #-----------Direction Funckey-----#
 funckey Left  ipick -1
