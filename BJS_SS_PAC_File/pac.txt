@@ -2,7 +2,7 @@
 // https://github.com/clowwindy/gfwlist2pac
 
 var domains = {
-  "just try"
+  "delete"
   "bbs.ncar.cc":1,
   "www.keil.com":1,
   "www.makeuseof.com": 1,
