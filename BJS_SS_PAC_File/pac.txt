@@ -2,7 +2,7 @@
 // https://github.com/clowwindy/gfwlist2pac
 
 var domains = {
-  "just"
+  "just try"
   "bbs.ncar.cc":1,
   "www.keil.com":1,
   "www.makeuseof.com": 1,
